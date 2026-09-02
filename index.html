@@ -8,7 +8,8 @@
         :root {
             --primary: #4ade80; --dark: #0f172a; --ui-bg: rgba(15, 23, 42, 0.7);
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; touch-action: none; }
+        /* Removed touch-action: none from here so scrolling works on overlay screens */
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
         body {
             background-color: #000; display: flex; justify-content: center;
             align-items: center; height: 100vh; overflow: hidden;
@@ -19,7 +20,8 @@
             position: relative; width: 100vw; height: 100vh; background: #022c22;
             overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.8);
         }
-        canvas { display: block; width: 100%; height: 100%; cursor: crosshair; z-index: 1; }
+        /* Lock touches ONLY on the canvas to prevent page pull-refresh while playing */
+        canvas { display: block; width: 100%; height: 100%; cursor: crosshair; z-index: 1; touch-action: none; }
         
         #ui-layer {
             position: absolute; top: 0; left: 0; width: 100%;
@@ -51,6 +53,7 @@
             box-shadow: 0 0 15px rgba(239, 68, 68, 0.6), 0 5px 10px rgba(0,0,0,0.4);
             cursor: pointer; transition: transform 0.1s;
             display: flex; justify-content: center; align-items: center;
+            touch-action: manipulation;
         }
         #btn-fire:active { background: #dc2626; transform: scale(0.92); }
         
@@ -58,7 +61,7 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); display: flex; flex-direction: column;
             justify-content: center; align-items: center; color: white; z-index: 15;
-            padding: 20px; text-align: center;
+            padding: 20px; text-align: center; touch-action: auto; pointer-events: auto;
         }
         .overlay-screen h1 { color: #4ade80; margin-bottom: 10px; font-size: 2.5rem; text-shadow: 2px 2px 4px #000;}
         #game-over, #win-screen, #briefing-screen, #final-stats-screen { display: none; }
@@ -87,7 +90,10 @@
             margin-bottom: 15px; width: 100%; max-width: 350px; text-align: left;
         }
         .stat-box h2 { color: #4ade80; margin-bottom: 10px; text-align: center; font-size: 1.6rem;}
-        .stats-scroll { max-height: 150px; overflow-y: auto; margin-bottom: 10px; padding-right: 10px; }
+        .stats-scroll { 
+            max-height: 150px; overflow-y: auto; margin-bottom: 10px; padding-right: 10px; 
+            touch-action: pan-y; /* Fixes mobile scrolling! */
+        }
         .stat-row { display: flex; justify-content: space-between; font-size: 1.2rem; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 5px; }
         .signoff { color: #fbbf24; font-style: italic; font-size: 1.4rem; margin-bottom: 20px; font-weight: bold; text-shadow: 1px 1px 3px #000;}
     </style>
@@ -168,6 +174,7 @@
     let coyoteHitCount = 0;
     let lastTalkerFrame = 0;
     
+    // Tracking Variables for Score Reset Logic
     let score = 0; 
     let killStats = {};
     let savedScore = 0; 
@@ -277,7 +284,7 @@
     let currentWeaponIndex = 0;
     let projectiles = [], enemies = [], particles = [], scenery = [];
     
-    // Increased speeds across all levels for challenge
+    // REBALANCED POINT SYSTEM & FASTER SPEEDS
     const ENEMY_L1 = [
         { name: 'Fly', icon: '🪰', points: 10, speed: 2.0, width: 35, type: 'enemy' },
         { name: 'Mosquito', icon: 'mosquito', points: 20, speed: 2.5, width: 35, type: 'enemy' },
@@ -303,7 +310,7 @@
         { name: 'Rabbit', icon: 'rabbit', points: 50, speed: 4.5, width: 40, type: 'enemy' },
         { name: 'DirtBike', icon: 'dirtbike', points: 100, speed: 5.5, width: 50, type: 'enemy' },
         { name: 'Deer', icon: 'deer', points: 150, speed: 4.5, width: 60, type: 'enemy' },
-        { name: 'Truck', icon: 'truck', points: 300, speed: 4.0, width: 80, type: 'enemy' },
+        { name: 'Truck', icon: 'truck', points: 300, speed: 4.5, width: 80, type: 'enemy' },
         { name: 'Boulder', icon: 'boulder', points: 0, speed: 3.5, width: 50, type: 'obstacle' }
     ];
 
@@ -319,7 +326,7 @@
 
     function initAudio() {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        bgMusic.volume = 0.08; 
+        bgMusic.volume = 0.04; 
         bgMusic.play().catch(e => console.log("Audio blocked."));
     }
 
@@ -491,7 +498,7 @@
         let spawnRate = currentLevel === 3 ? 45 : (currentLevel === 2 ? 60 : 75);
         if (frameCount % spawnRate === 0 && frameCount < MAX_FRAMES) {
             let rand = Math.random(); let type;
-            let isTalkerCooldown = (frameCount - lastTalkerFrame < 250); 
+            let isTalkerCooldown = (frameCount - lastTalkerFrame < 180); 
             
             if (currentLevel === 1) {
                 if (isTalkerCooldown) {
@@ -531,19 +538,18 @@
                     else if (rand < 0.80) type = ENEMY_L3[1]; 
                     else type = ENEMY_L3[6]; 
                 } else {
-                    if (rand < 0.15) type = ENEMY_L3[0]; // 15% Fly
-                    else if (rand < 0.30) type = ENEMY_L3[1]; // 15% Mosquito
-                    else if (rand < 0.45) { type = ENEMY_L3[2]; lastTalkerFrame = frameCount; } // 15% Rabbit
-                    else if (rand < 0.65) type = ENEMY_L3[3]; // 20% DirtBike
-                    else if (rand < 0.80) { type = ENEMY_L3[4]; lastTalkerFrame = frameCount; } // 15% Deer
-                    else if (rand < 0.90) { type = ENEMY_L3[5]; lastTalkerFrame = frameCount; } // 10% Truck
-                    else type = ENEMY_L3[6]; // 10% Obstacles
+                    if (rand < 0.10) type = ENEMY_L3[0]; // 10% Fly
+                    else if (rand < 0.20) type = ENEMY_L3[1]; // 10% Mosquito
+                    else if (rand < 0.35) { type = ENEMY_L3[2]; lastTalkerFrame = frameCount; } // 15% Rabbit
+                    else if (rand < 0.55) type = ENEMY_L3[3]; // 20% DirtBike
+                    else if (rand < 0.70) { type = ENEMY_L3[4]; lastTalkerFrame = frameCount; } // 15% Deer
+                    else if (rand < 0.90) { type = ENEMY_L3[5]; lastTalkerFrame = frameCount; } // 20% Truck
+                    else type = ENEMY_L3[6]; // 10% Obstacle
                 }
             }
             
             let ex = pathLeft + 35 + Math.random() * (pathWidth - 70);
             
-            // Dynamic Obstacle Swap
             let enemyToPush = { ...type, x: ex, baseX: ex, buzzOffset: Math.random() * Math.PI * 2, y: -50, active: true };
             if (enemyToPush.type === 'obstacle') {
                 if (currentLevel === 1 || currentLevel === 3) {
