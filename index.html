@@ -203,28 +203,28 @@
 
     const baseTruck = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140"><defs><linearGradient id="gT" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="COLOR2"/><stop offset="50%" stop-color="COLOR1"/><stop offset="100%" stop-color="COLOR2"/></linearGradient></defs><rect x="6" y="8" width="88" height="126" fill="url(#gT)" rx="14" stroke="#111" stroke-width="2"/><rect x="2" y="20" width="13" height="30" fill="#000" rx="3"/><rect x="85" y="20" width="13" height="30" fill="#000" rx="3"/><rect x="2" y="90" width="13" height="30" fill="#000" rx="3"/><rect x="85" y="90" width="13" height="30" fill="#000" rx="3"/><rect x="16" y="38" width="68" height="34" fill="#030712" rx="5"/><rect x="16" y="78" width="68" height="48" fill="#000" opacity="0.6"/><path d="M 10 15 L 90 15 L 85 25 L 15 25 Z" fill="#fff" opacity="0.8"/><circle cx="20" cy="20" r="4" fill="#f1c40f"/><circle cx="80" cy="20" r="4" fill="#f1c40f"/><text x="5" y="45" font-size="22" fill="#000" transform="rotate(-15 5 45)">🎵</text><text x="75" y="25" font-size="22" fill="#000" transform="rotate(25 75 25)">🎶</text><text x="80" y="85" font-size="22" fill="#000" transform="rotate(10 80 85)">🎵</text></svg>`;
     const truckVars = [
-        buildSVG(baseTruck, {'COLOR1': '#ef4444', 'COLOR2': '#7f1d1d'}), // Red
-        buildSVG(baseTruck, {'COLOR1': '#f8fafc', 'COLOR2': '#94a3b8'}), // White
-        buildSVG(baseTruck, {'COLOR1': '#3b82f6', 'COLOR2': '#1e3a8a'}), // Blue
-        buildSVG(baseTruck, {'COLOR1': '#374151', 'COLOR2': '#030712'}), // Black
-        buildSVG(baseTruck, {'COLOR1': '#f97316', 'COLOR2': '#9a3412'})  // Orange
+        buildSVG(baseTruck, {'COLOR1': '#ef4444', 'COLOR2': '#7f1d1d'}), 
+        buildSVG(baseTruck, {'COLOR1': '#f8fafc', 'COLOR2': '#94a3b8'}), 
+        buildSVG(baseTruck, {'COLOR1': '#3b82f6', 'COLOR2': '#1e3a8a'}), 
+        buildSVG(baseTruck, {'COLOR1': '#374151', 'COLOR2': '#030712'}), 
+        buildSVG(baseTruck, {'COLOR1': '#f97316', 'COLOR2': '#9a3412'})  
     ];
     imgs.truck = truckVars[0]; 
 
     const baseDirtBike = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="70" r="17" fill="#09090b" stroke="#3f3f46" stroke-width="5" stroke-dasharray="4,2"/><circle cx="80" cy="70" r="17" fill="#09090b" stroke="#3f3f46" stroke-width="5" stroke-dasharray="4,2"/><polygon points="20,70 38,34 72,34 80,70 50,82" fill="COLOR1"/><polygon points="38,34 50,28 62,34" fill="#000"/><line x1="80" y1="70" x2="64" y2="18" stroke="#cbd5e1" stroke-width="6"/><path d="M 58 34 Q 74 24 86 34" stroke="COLOR1" stroke-width="6" fill="none"/><circle cx="50" cy="12" r="12" fill="#09090b"/><rect x="36" y="24" width="28" height="34" fill="#18181b" rx="7"/><line x1="42" y1="28" x2="66" y2="18" stroke="#000" stroke-width="8" stroke-linecap="round"/></svg>`;
     const dirtBikeVars = [
-        buildSVG(baseDirtBike, {'COLOR1': '#ea580c'}), // Orange
-        buildSVG(baseDirtBike, {'COLOR1': '#f8fafc'}), // White
-        buildSVG(baseDirtBike, {'COLOR1': '#3b82f6'}), // Blue
-        buildSVG(baseDirtBike, {'COLOR1': '#22c55e'})  // Green
+        buildSVG(baseDirtBike, {'COLOR1': '#ea580c'}), 
+        buildSVG(baseDirtBike, {'COLOR1': '#f8fafc'}), 
+        buildSVG(baseDirtBike, {'COLOR1': '#3b82f6'}), 
+        buildSVG(baseDirtBike, {'COLOR1': '#22c55e'})  
     ];
     imgs.dirtBike = dirtBikeVars[0]; 
 
     const baseJetSki = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M 10 90 Q 50 100 90 90" fill="none" stroke="#fff" stroke-width="4" opacity="0.6"/><path d="M 20 85 L 80 85 L 90 70 L 10 70 Z" fill="#111"/><path d="M 10 70 L 90 70 Q 80 40 50 40 Q 20 40 10 70" fill="COLOR1"/><path d="M 30 40 Q 50 20 70 40 Z" fill="COLOR2"/><rect x="35" y="30" width="30" height="15" fill="#222" rx="4"/><rect x="65" y="15" width="4" height="25" fill="#333"/><rect x="55" y="15" width="24" height="4" fill="#111"/><circle cx="45" cy="10" r="10" fill="#e74c3c"/><rect x="40" y="20" width="10" height="20" fill="#e74c3c" rx="4"/></svg>`;
     const jetSkiVars = [
-        buildSVG(baseJetSki, {'COLOR1': '#7e22ce', 'COLOR2': '#9b59b6'}), // Purple
-        buildSVG(baseJetSki, {'COLOR1': '#eab308', 'COLOR2': '#fde047'}), // Yellow
-        buildSVG(baseJetSki, {'COLOR1': '#2563eb', 'COLOR2': '#60a5fa'})  // Blue
+        buildSVG(baseJetSki, {'COLOR1': '#7e22ce', 'COLOR2': '#9b59b6'}), 
+        buildSVG(baseJetSki, {'COLOR1': '#eab308', 'COLOR2': '#fde047'}), 
+        buildSVG(baseJetSki, {'COLOR1': '#2563eb', 'COLOR2': '#60a5fa'})  
     ];
     imgs.jetSki = jetSkiVars[0]; 
 
@@ -290,7 +290,7 @@
         { name: 'Shark', icon: 'shark', points: 150, speed: 3.5, width: 60, type: 'enemy', hp: 5 },
         { name: 'BoatPolice', icon: 'boat', points: 300, speed: 4.5, width: 80, type: 'enemy', hp: 5 },
         { name: 'Boulder', icon: 'boulder', points: 0, speed: 3.0, width: 50, type: 'obstacle', hp: 999 },
-        { name: 'JetSki', icon: 'jetski', points: 250, speed: 6.0, width: 60, type: 'enemy', hp: 5, vars: jetSkiVars }
+        { name: 'JetSki', icon: 'jetski', points: 250, speed: 4.5, width: 60, type: 'enemy', hp: 5, vars: jetSkiVars }
     ];
     const ENEMY_L3 = [
         { name: 'Fly', icon: '🪰', points: 10, speed: 3.0, width: 35, type: 'enemy', hp: 1 },
@@ -665,7 +665,7 @@
                             
                             particles.push({ text: '+'+earned, x: e.x, y: e.y, vx: 0, vy: -2, life: 1.0, color: '#4ade80' });
                             
-                            if (kc % 3 === 0) {
+                            if (kc % 2 === 0) {
                                 if (e.name === 'Bear') { speakPhrase(bearQuotes[bearQuoteIndex]); bearQuoteIndex = (bearQuoteIndex + 1) % bearQuotes.length; } 
                                 else if (e.name === 'Ranger') { speakPhrase(rangerQuotes[rangerQuoteIndex]); rangerQuoteIndex = (rangerQuoteIndex + 1) % rangerQuotes.length; } 
                                 else if (e.name === 'BoatPolice') { speakPhrase(policeQuotes[policeQuoteIndex]); policeQuoteIndex = (policeQuoteIndex + 1) % policeQuotes.length; }
@@ -675,7 +675,7 @@
                                 else if (e.name === 'Deer') { speakPhrase(deerQuotes[deerQuoteIndex]); deerQuoteIndex = (deerQuoteIndex + 1) % deerQuotes.length; }
                                 else if (e.name === 'Truck') { speakPhrase("Not today, weekend warrior."); }
                             }
-                            if (e.name === 'BigBass' && kc % 3 === 0) speakPhrase("Catch of the day!");
+                            if (e.name === 'BigBass' && kc % 2 === 0) speakPhrase("Catch of the day!");
                             
                             for(let i=0; i<10; i++) particles.push({x: e.x, y: e.y, vx: (Math.random()-0.5)*14, vy: (Math.random()-0.5)*14, life: 0.8, color: '#f59e0b', size: 4});
                         }
@@ -693,9 +693,7 @@
     function draw() {
         ctx.save();
         if (screenShake > 0.4) {
-            let dx = (Math.random() - 0.5) * screenShake;
-            let dy = (Math.random() - 0.5) * screenShake;
-            ctx.translate(dx, dy);
+            ctx.translate((Math.random() - 0.5) * screenShake, (Math.random() - 0.5) * screenShake);
         }
 
         if (currentLevel === 1) {
@@ -825,7 +823,6 @@
             else { ctx.fillStyle = p.color; ctx.globalAlpha = Math.max(p.life, 0); ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill(); }
             ctx.globalAlpha = 1.0;
         });
-
         ctx.restore();
     }
 
@@ -840,6 +837,7 @@
             document.getElementById('next-level-btn').style.display = 'block';
             document.getElementById('next-level-btn').innerText = "START LEVEL 2";
             document.getElementById('next-level-btn').onclick = () => showBriefing(2);
+            speakPhrase("Did I miss Chad's sermon?");
             setTimeout(() => { screen.style.display = 'flex'; document.getElementById('win-score').innerText = score; document.getElementById('controls').style.display = 'none'; }, 4000);
         } else if (currentLevel === 2) {
             let screen = document.getElementById('win-screen');
@@ -848,6 +846,7 @@
             document.getElementById('next-level-btn').style.display = 'block';
             document.getElementById('next-level-btn').innerText = "START LEVEL 3";
             document.getElementById('next-level-btn').onclick = () => showBriefing(3);
+            speakPhrase("Guys, did I miss when we splash each other in the water?");
             setTimeout(() => { screen.style.display = 'flex'; document.getElementById('win-score').innerText = score; document.getElementById('controls').style.display = 'none'; }, 4000);
         } else {
             let screen = document.getElementById('final-stats-screen');
@@ -858,6 +857,7 @@
             }
             if(statHtml === '') statHtml = '<div class="stat-row" style="text-align:center;">No targets hit!</div>';
             document.getElementById('stats-list').innerHTML = statHtml;
+            speakPhrase("Rick, welcome to heaven.");
             setTimeout(() => { screen.style.display = 'flex'; document.getElementById('final-total-score').innerText = score; document.getElementById('controls').style.display = 'none'; }, 4000); 
         }
     }
@@ -904,7 +904,7 @@
         player.x = canvas.width / 2; isGameOver = false; isGameWon = false;
         
         if (currentLevel === 1) { bgMusic.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; speakPhrase("I think I'm late for service. Three and a half hours of traffic, are you serious?!"); }
-        else if (currentLevel === 2) { bgMusic.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"; speakPhrase("I'm coming, boys."); }
+        else if (currentLevel === 2) { bgMusic.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"; }
         else { bgMusic.src = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-14.mp3"; speakPhrase("Buckle up, Rick. We're headed to God's country."); }
         
         bgMusic.currentTime = 0; bgMusic.play();
